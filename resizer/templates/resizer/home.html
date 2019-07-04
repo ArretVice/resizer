@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Resizer
+    </title>
+</head>
+<body>
+    <h1>Image resizer application</h1>
+    <ul>
+        <li><a href="{% url 'resizer:home' %}">Home</a></li>
+        <li><a href="{% url 'resizer:upload' %}">Upload image</a></li>
+        <li><a href="{% url 'resizer:status_page' %}">Status page</a></li>
+    </ul>
+    <div>
+        {% block content %}{% endblock content %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "resizer/home.html" %}
+
+{% block content %}
+    <h2>Select file to upload:</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+{% endblock content %}
