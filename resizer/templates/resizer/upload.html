@@ -1,10 +1,12 @@
 {% extends "resizer/home.html" %}
 
+
 {% block content %}
     <h2>Select file to upload:</h2>
-    <form method="post" enctype="multipart/form-data">
+    <form action="{% url 'resizer:upload' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Upload</button>
+        {% include 'resizer/includes/custom_form.html' with form=form %}
+        <button type="submit">Resize</button>
+        <!-- add logic to display uploaded image, task ID and other stuff-->
     </form>
 {% endblock content %}

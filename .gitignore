@@ -1,6 +1,7 @@
 # custom ignores
 *.pdf
 media/
+links_and_guides.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

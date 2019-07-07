@@ -6,8 +6,5 @@ app_name = 'resizer'
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('upload/', views.upload, name='upload'),
-    path('resize/<str:image_id>', views.resize, name='resize'),
-    path('status/', views.status_page, name='status_page'),
-    path('status/<str:image_id>/', views.check_status, name='check_status'),
+    path('upload/', views.UploadAndResizeView.as_view(), name='upload'),
 ]
