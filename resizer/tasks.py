@@ -2,9 +2,20 @@ from celery import shared_task
 from PIL import Image
 from django.conf import settings
 import os
+import logging
 
 
 media_root = settings.MEDIA_ROOT
+
+# logger settings
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+handler = logging.FileHandler('resizer.log')
+handler.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
 
 @shared_task
 def resize_image_task(image, width, height):
@@ -19,4 +30,5 @@ def resize_image_task(image, width, height):
     path = os.path.join(media_root, relative_image_location)
     resized_image.save(path)
     os.remove(image)
+    logger.info(f'Resized {filename} to {width}x{height}')
     return relative_image_location
