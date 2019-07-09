@@ -1,0 +1,19 @@
+{% extends "resizer/home.html" %}
+
+
+{% block content %}
+    {% if not task_id %}
+        <h2>Check status of your Task</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% include 'resizer/includes/custom_form.html' with form=form %}
+            <button type="submit">Check</button>
+        </form>
+    {% else %}
+        <h2>Your task ID: {{ task_id }}</h2>
+        <h3>Status: {{ task_status }}</h3> <a href="{% url 'resizer:task' task_id %}">Refresh</a>
+        {% ifequal task_status 'SUCCESS' %}
+            <img src="{{ MEDIA_URL }}/{{ resized_image_path }}">   
+        {% endifequal %}
+    {% endif %}
+{% endblock content %}

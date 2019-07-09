@@ -2,6 +2,8 @@
 *.pdf
 media/
 links_and_guides.txt
+todo.txt
+*.rdb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

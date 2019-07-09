@@ -1,11 +1,22 @@
 from celery import shared_task
+from PIL import Image
 from django.conf import settings
+import os
 
+
+media_root = settings.MEDIA_ROOT
 
 @shared_task
-def resize_image_task(image_path, width, height):
+def resize_image_task(image, width, height):
     '''
     resize_image(<image>, <width>, <height>)
-    Returns resized copy of <image_path>.
+    Returns path to resized copy of image.
     '''
-    return Image.open(image).resize((width, height))
+    initial_image = Image.open(image)
+    filename = initial_image.filename.split('/')[-1]
+    resized_image = initial_image.resize((width, height))
+    relative_image_location = f'tmp/resized_{filename}'
+    path = os.path.join(media_root, relative_image_location)
+    resized_image.save(path)
+    os.remove(image)
+    return relative_image_location

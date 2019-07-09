@@ -1,7 +1,0 @@
-{% extends "resizer/home.html" %}
-
-{% block content %}
-    <h2>Your resized image:</h2>
-    <p>Your image ID: <strong>{{ image.pk }}</strong></p>
-    <img src="{{ image.image.url }}">
-{% endblock content %}

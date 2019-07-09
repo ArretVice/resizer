@@ -7,6 +7,10 @@
         {% csrf_token %}
         {% include 'resizer/includes/custom_form.html' with form=form %}
         <button type="submit">Resize</button>
-        <!-- add logic to display uploaded image, task ID and other stuff-->
+        <br>
+        {% if task_id %}
+            <h2>Task</h2>
+            Task ID: {{ task_id }} <a href="{% url 'resizer:task' task_id %}">Check status</a>
+        {% endif %}
     </form>
 {% endblock content %}

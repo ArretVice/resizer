@@ -1,8 +1,0 @@
-{% extends "resizer/home.html" %}
-
-{% block content %}
-    <h2>Check status by image ID</h2>
-    <label for="image_id">Image ID:</label>
-    <input type="text" id="image_id" name="image_id">
-    <button type="submit" formaction="{% url 'resizer:check_status' 1 %}">Check</button>
-{% endblock content %}
