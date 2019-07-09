@@ -2,16 +2,10 @@
 <html>
 <head>
     <title>
-        Resizer
+        Image resizer
     </title>
 </head>
 <body>
-    <!-- Messages -->
-        {% if messages %}
-            {% for message in messages %}
-              <h1>{{ message }}</h1>
-            {% endfor %}
-        {% endif %}
     <h1>Image resizer application</h1>
     <ul>
         <li><a href="{% url 'resizer:home' %}">Home</a></li>

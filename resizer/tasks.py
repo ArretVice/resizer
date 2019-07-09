@@ -1,8 +1,10 @@
+import os
+import logging
+
 from celery import shared_task
 from PIL import Image
 from django.conf import settings
-import os
-import logging
+
 
 
 media_root = settings.MEDIA_ROOT

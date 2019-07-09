@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
@@ -5,8 +7,8 @@ from django.core.files.storage import default_storage
 from django.core.files.base import File
 from django.conf import settings
 from celery import current_app
-import os
 from django.http import HttpResponseRedirect
+
 from .forms import ImageUploadForm, CheckTaskByIDForm
 from .tasks import resize_image_task
 

@@ -6,7 +6,7 @@
         <h2>Check status of your Task</h2>
         <form method="post">
             {% csrf_token %}
-            {% include 'resizer/includes/custom_form.html' with form=form %}
+            {{ form.as_p }}
             <button type="submit">Check</button>
         </form>
     {% else %}

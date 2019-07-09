@@ -13,7 +13,7 @@ IMAGE_DIMENSIONS = {
     },
 }
 MAX_FILE_SIZE_MB = 3 # 3 MB default
-MAX_FILE_SIZE = MAX_FILE_SIZE_MB * 2 ** 20 
+MAX_FILE_SIZE = MAX_FILE_SIZE_MB * 2**20 
 
 
 class ImageUploadForm(forms.Form):
@@ -34,7 +34,9 @@ class ImageUploadForm(forms.Form):
         image = self.cleaned_data['image']
         image_format = image.name.split('.')[-1].lower()
         if image_format not in VALID_FORMATS:
-            raise forms.ValidationError(f'Error: the image must be in one of the following formats: {", ".join(VALID_FORMATS)}.')
+            raise forms.ValidationError(
+                f'Error: the image must be in one of the following formats: {", ".join(VALID_FORMATS)}.'
+            )
         if image.size > MAX_FILE_SIZE:
             raise forms.ValidationError(f'Error: the image size exceeds {MAX_FILE_SIZE_MB} MB.')
         return image
