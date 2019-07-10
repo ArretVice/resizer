@@ -21,7 +21,7 @@ logger.addHandler(handler)
 def resize_image_task(image, width, height):
     '''
     resize_image(<image>, <width>, <height>)
-    Returns path to resized copy of image.
+    Returns relative path to resized copy of image.
     WARNING: initial image is deleted in the process, so consider passing copy of an image.
     '''
     initial_image = Image.open(image)
