@@ -1,7 +1,6 @@
 import os
 import random
 
-from PIL import Image
 from django.test import SimpleTestCase
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile

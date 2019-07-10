@@ -17,12 +17,12 @@ formatter = logging.Formatter('%(asctime)s - %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-
 @shared_task
 def resize_image_task(image, width, height):
     '''
     resize_image(<image>, <width>, <height>)
     Returns path to resized copy of image.
+    WARNING: initial image is deleted in the process, so consider passing copy of an image.
     '''
     initial_image = Image.open(image)
     filename = initial_image.filename.split('/')[-1]
