@@ -6,7 +6,6 @@ from PIL import Image
 from django.conf import settings
 
 
-
 media_root = settings.MEDIA_ROOT
 
 # logger settings
