@@ -17,6 +17,7 @@ MAX_FILE_SIZE = MAX_FILE_SIZE_MB * 2**20
 
 
 class ImageUploadForm(forms.Form):
+
     image = forms.ImageField(required=True)
     width = forms.IntegerField(
         min_value=IMAGE_DIMENSIONS['width']['min'],
@@ -43,4 +44,5 @@ class ImageUploadForm(forms.Form):
 
 
 class CheckTaskByIDForm(forms.Form):
+    
     task_id = forms.CharField(label='Task ID:', required=True)

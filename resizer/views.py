@@ -15,6 +15,7 @@ from .tasks import resize_image_task
 
 # Create your views here.
 class UploadAndResizeView(View):
+
     def get(self, request):
         form = ImageUploadForm()
         return render(request, 'resizer/upload.html', {'form': form})
@@ -39,6 +40,7 @@ class UploadAndResizeView(View):
 
 
 class CheckStatusView(View):
+
     def get(self, request):
         form = CheckTaskByIDForm()
         return render(request, 'resizer/check_status.html', {'form': form})
@@ -52,6 +54,7 @@ class CheckStatusView(View):
 
 
 class TaskStatusView(View):
+    
     def get(self, request, task_id):
         task = current_app.AsyncResult(task_id)
         context = {
