@@ -73,6 +73,7 @@ class TestUploadAndResizeViewPost(TestCase):
         self.assertNotContains(response, response.context.get('task_status'))
 
 
+@tag('slow')
 class TestCheckStatusView(TestCase):
 
     def setUp(self):
@@ -102,6 +103,7 @@ class TestCheckStatusView(TestCase):
         self.assertTemplateUsed(response, 'resizer/check_status.html')
 
 
+@tag('slow')
 class TestTaskStatusView(SimpleTestCase):
 
     def setUp(self):
