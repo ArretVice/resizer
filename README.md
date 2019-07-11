@@ -75,8 +75,9 @@ $ celery worker -A main
 $ python3 manage.py test
 ```
 
-### 9. Run server on localhost
+### 9. Migrate database and run server on localhost
 ```sh
+$ python3 manage.py migrate
 $ python3 manage.py runserver
 ```
 
