@@ -7,8 +7,6 @@ from django.test import SimpleTestCase
 from resizer.tasks import resize_image_task
 
 
-
-
 class TestResizeImageTask(SimpleTestCase):
 
     def setUp(self):

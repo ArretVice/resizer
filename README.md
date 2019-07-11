@@ -106,7 +106,7 @@ Enter the ID for image and click "Check" to ckeck it's status.
 
 Resizer app stores resized images and their ID's, so you could retrieve your resized image. However, you may want to clean those files, as well as ID entries in the database, and possibly delete log of all performed operations. Use the following command for that:
 ```sh
-$ python3 manage.py cleardbandfolder
+$ python3 manage.py cleanup
 ```
 
 #### Checking logs:

@@ -8,7 +8,7 @@ from resizer.models import ProcessedTasks
 
 class Command(BaseCommand):
     help = '''
-         - Deletes all entries in database about any resized images
+         - Deletes all entries in the database about any resized images
          - Clears ./media/tmp folder
          - Deletes log file "resizer.log"
     '''
