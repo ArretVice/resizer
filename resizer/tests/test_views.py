@@ -1,7 +1,7 @@
 import os
 
 from PIL import Image
-from django.test import SimpleTestCase, Client
+from django.test import SimpleTestCase, Client, TestCase
 from django.test import tag
 from django.urls import reverse, reverse_lazy
 from django.conf import settings
@@ -9,6 +9,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 from resizer import views
 from resizer import forms
+from resizer.models import ProcessedTasks
 
 
 class TestHomeView(SimpleTestCase):
@@ -35,8 +36,9 @@ class TestUploadAndResizeViewGet(SimpleTestCase):
 
 
 # this test requires connection to message broker
+# skip with command: python manage.py test --exclude-tag=slow
 @tag('slow')
-class TestUploadAndResizeViewPost(SimpleTestCase):
+class TestUploadAndResizeViewPost(TestCase):
 
     def setUp(self):
         self.client = Client()
@@ -61,6 +63,7 @@ class TestUploadAndResizeViewPost(SimpleTestCase):
         self.assertContains(response, response.context.get('task_id'))
         self.assertContains(response, response.context.get('task_status'))
         self.assertNotContains(response, response.context.get('form'))
+        self.assertTrue(ProcessedTasks.objects.get(task_id=response.context.get('task_id')))
 
     def test_invalid_post(self):
         response = self.client.post(reverse('resizer:upload'), self.post_data_invalid)
@@ -70,11 +73,15 @@ class TestUploadAndResizeViewPost(SimpleTestCase):
         self.assertNotContains(response, response.context.get('task_status'))
 
 
-class TestCheckStatusView(SimpleTestCase):
+class TestCheckStatusView(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.post_data = {'task_id': 'some task ID 123980djweix 432-76@#$%'}
+        self.task_id = 'some task ID 123980djweix 432-76@#$%'
+        ProcessedTasks.objects.create(task_id=self.task_id)
+        self.post_data = {'task_id': self.task_id}
+        self.post_data_invalid = self.post_data.copy()
+        self.post_data_invalid['task_id'] = 'unknown task id'
         self.redirect_url = reverse_lazy('resizer:task', kwargs={'task_id': self.post_data['task_id']})
 
     def test_get(self):
@@ -83,10 +90,16 @@ class TestCheckStatusView(SimpleTestCase):
         self.assertTemplateUsed(response, 'resizer/check_status.html')
         self.assertIsInstance(response.context['form'], forms.CheckTaskByIDForm)
 
-    def test_post(self):
+    def test_post_valid(self):
         response = self.client.post(reverse('resizer:check_status'), self.post_data)
         self.assertEquals(response.status_code, 302)    # HTTP 302 - redirection
         self.assertRedirects(response, self.redirect_url)
+
+    def test_post_invalid(self):
+        response = self.client.post(reverse('resizer:check_status'), self.post_data_invalid)
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(len(list(response.context['messages'])), 1)
+        self.assertTemplateUsed(response, 'resizer/check_status.html')
 
 
 class TestTaskStatusView(SimpleTestCase):

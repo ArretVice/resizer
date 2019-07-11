@@ -7,6 +7,12 @@
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
+            {% if messages %}
+                {% for message in messages %}
+                    <font color="red">{{ message }}</font>
+                {% endfor %}
+            {% endif %}
+            <br>
             <button type="submit">Check</button>
         </form>
     {% else %}

@@ -50,7 +50,7 @@ class TestImageUploadForm(SimpleTestCase):
                     f'Error: the image size exceeds {MAX_FILE_SIZE_MB} MB.'
                 )
             elif error == 'wrong format':
-                self.assertFalse(form.is_valid(), f'oops, {file}')
+                self.assertFalse(form.is_valid())
                 self.assertEqual(
                     form.errors['image'][0],
                     f'Error: the image must be in one of the following formats: {", ".join(VALID_FORMATS)}.'
