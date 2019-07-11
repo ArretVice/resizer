@@ -81,5 +81,34 @@ $ python3 manage.py migrate
 $ python3 manage.py runserver
 ```
 
-## Installation complete
-##### Web service will be running at localhost:8000
+## Installation complete!
+##### Web service will be running at [localhost:8000](http://localhost:8000 "localhost:8000")
+
+
+## User guide:
+
+#### Uploading image:
+1. Click Upload image
+2. Click "Choose file", select the image you want to resize
+3. Enter desired width and height into corresponding fields
+4. Click "Resize" to proceed
+
+You will be redirected to status page, where you would get your resized image ID and status.
+Click "Refresh" to check if your image has been resized.
+If the image has been resized, it will be displayed below it's status.
+
+#### Checking status:
+
+You may check the status of your image by clicking "Status page" link.
+Enter the ID for image and click "Check" to ckeck it's status.
+
+#### Cleaning up:
+
+Resizer app stores resized images and their ID's, so you could retrieve your resized image. However, you may want to clean those files, as well as ID entries in the database, and possibly delete log of all performed operations. Use the following command for that:
+```sh
+$ python3 manage.py cleardbandfolder
+```
+
+#### Checking logs:
+
+If you wish to check performed operations, they are logged in *resizer.log* file.
